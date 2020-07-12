@@ -7,4 +7,8 @@ class ItemAdmin(admin.ModelAdmin):
 
 
 class ToDoListAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user')
+    list_display = ('id', 'name', 'user')
+
+
+admin.site.register(ToDoList, ToDoListAdmin)
+admin.site.register(Item, ItemAdmin)
