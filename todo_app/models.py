@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class ToDoList(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='todolist')
+        User, on_delete=models.CASCADE, related_name='todolist', null=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):

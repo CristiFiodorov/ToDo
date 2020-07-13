@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import *
+from .models import ToDoList, Item
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'text', 'todolist')
+    list_display = ('text', 'todolist', 'id',)
 
 
 class ToDoListAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'user')
+    list_display = ('name', 'user', 'id')
 
 
 admin.site.register(ToDoList, ToDoListAdmin)
