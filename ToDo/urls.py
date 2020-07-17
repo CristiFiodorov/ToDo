@@ -24,7 +24,5 @@ urlpatterns = [
     path('', include('todo_app.urls')),
     path('', views.home, name='home'),
     path('', include('django.contrib.auth.urls')),
-    
-
-
+    path('profile/', views.profile, name='profile'),
 ]

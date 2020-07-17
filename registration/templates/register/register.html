@@ -3,12 +3,15 @@
 {% block title %}
 Create an Account
 {% endblock  %}
+{% block page_name %}
+Create an Account
+{% endblock  %}
 {% load crispy_forms_tags %}
 
 {% block content %}
     <form method="POST" class="form-gruop">
         {% csrf_token %}
         {{form|crispy}}
-        <button type="submit" class="btn btn-success">Register</button>
+        <button type="submit" class="btn btn-outline-success">Register</button>
     </form>
 {% endblock  %}

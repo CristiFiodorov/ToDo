@@ -3,10 +3,14 @@
 View ToDo List
 {% endblock  %}
 
+{% block page_name %}
+View ToDo Lists
+{% endblock  %}
+
 {% block content %}
     <ul class="list-group">
 		{% for td in user.todolist.all %}
-			<li class="list-group-item"><a href="/{{td.id}}"><h3>{{td.name}}</h3></a></li>
+				<li class="list-group-item"><a href="/{{td.id}}"><h3>{{td.name}}</h3></a></li>
 		{% endfor %}
     </ul>
 {% endblock  %}

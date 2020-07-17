@@ -4,14 +4,18 @@
 Create
 {% endblock  %}
 
+{% block page_name %}
+Create a New To Do List
+{% endblock  %}
+
 {% block content %}
-<h3>Create a New To Do List</h3>
+{% comment %} <h3>Create a New To Do List</h3> {% endcomment %}
 	<br>
 	<form method="post" action={% url 'todo_app:todo_create' %} class="form-group">
 		{% csrf_token %}
 		<div class="input-group mb-3">
 	  		<div class="input-group-prepend">
-	  		<button name="save" type="submit" class="btn btn-success">Create</button>
+	  		<button name="save" type="submit" class="btn btn-outline-success">Create</button>
 	  		</div>
 	  		{{form.name}}
 		</div>

@@ -4,6 +4,10 @@
 Login
 {% endblock  %}
 
+{% block page_name %}
+Login
+{% endblock  %}
+
 {% load crispy_forms_tags %}
 {% block content %}
 <form method="post" class="form-group">
@@ -11,7 +15,7 @@ Login
     {{form|crispy}}
     <p>Don't have an account? <a href= {% url 'register' %}>Sign up </a></p>
     <p><a href= {% url 'password_reset' %}>Forgot your password?</a></p>
-    <button type="submit" class="btn btn-success">Login</button>
+    <button type="submit" class="btn btn-outline-success">Login</button>
 </form>
 {% endblock  %}
 

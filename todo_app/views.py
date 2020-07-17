@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from .forms import CreateNewList
 from django.urls import reverse
 from .models import ToDoList, Item
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required(login_url='/login/')
@@ -20,12 +21,16 @@ def todo_create(request):
     else:
         form = CreateNewList()
 
-    return render(request, 'todo_app/todo_create.html', {"form": form})
+    return render(request, 'todo_app/todo_create.html', {'form': form})
 
 
 @login_required(login_url='/login/')
 def todo_list(request, id):
-    ls = ToDoList.objects.get(id=id)
+    # ls = get_object_or_404(ToDoList, id=id)
+    try:
+        ls = ToDoList.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse('todo_app:view'))
 
     if ls in request.user.todolist.all():
         if request.method == "POST":
@@ -47,6 +52,13 @@ def todo_list(request, id):
                     ls.item_set.create(text=new_item, complete=False)
                 else:
                     print("invalid")
+
+            for item in ls.item_set.all():
+                if request.POST.get(f'd{item.id}'):
+                    p = request.POST
+
+                    if "Delete" == p.get("d" + str(item.id)):
+                        item.delete()
 
         return render(request, 'todo_app/todolist.html', {'ls': ls})
     else:

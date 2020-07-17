@@ -3,30 +3,37 @@
 ToDo List
 {% endblock  %}
 
+{% block page_name %}
+Todo List
+{% endblock  %}
+
 {% block content %}
 	<h2>{{ls.name}}</h2>
 	<form method="post", action="#">
 		{% csrf_token %}
 
-		{% for item in ls.item_set.all%}
+		{% for item in ls.item.all%}
 			<div class="input-group mb-3">
 	  			<div class="input-group-prepend">
 	    			<div class="input-group-text">
 	      				<input type="checkbox" name="c{{item.id}}" value="clicked" aria-label="Checkbox for following text input" {% if item.complete %} checked {% endif %}>
 	    			</div>
 	  			</div>
-	  			<input type="text" name="text{{item.id}}" value="{{item.text}}" class="form-control" aria-label="Text input with checkbox">
+					<input type="text" name="text{{item.id}}" value="{{item.text}}" class="form-control" aria-label="Text input with checkbox">
+					<li class="list-inline-item">
+						<button class="btn btn-outline-danger" type="submit" value="Delete" name="d{{item.id}}">Delete</button>
+					</li>
 			</div>
 		{% endfor %}
 
 		<div class="input-group mb-3">
 	  		<div class="input-group-prepend">
-	  		<button name="add", value="add", type="submit", class="btn btn-success">Add New</button>
+	  		<button name="add", value="add", type="submit", class="btn btn-outline-success">Add New</button>
 	  		</div>
 	  		<input type="text" name="new" value="" class="form-control">
 	  		
 		</div>
 		<br>
-		<button name="save", value="save", type="submit", class="btn btn-success">Save</button>
+		<button name="save", value="save", type="submit", class="btn btn-outline-success">Save</button>
 	</form>
 {% endblock  %}
